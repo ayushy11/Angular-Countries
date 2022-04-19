@@ -1,48 +1,66 @@
-<div *ngIf="country$ | async; let country">
-  <button>
+<div class="country" *ngIf="country$ | async; let country">
+  <button class="button shadow" [routerLink]="'/'">
     <span class="fa fa-arrow-left"></span>
     Back
   </button>
-  <img [src]="country.flags.svg" />
-  <h3>{{ country.name }}</h3>
 
-  <p>
-    <strong>Native Name:</strong>
-    {{ country.nativeName }}
-  </p>
-  <p>
-    <strong>Population:</strong>
-    {{ country.population | number }}
-  </p>
-  <p>
-    <strong>Region:</strong>
-    {{ country.region }}
-  </p>
-  <p>
-    <strong>Sub Region:</strong>
-    {{ country.subregion }}
-  </p>
-  <p>
-    <strong>Capital:</strong>
-    {{ country.capital }}
-  </p>
-  <p>
-    <strong>Top Level Domain:</strong>
-    {{ country.topLevelDomain }}
-  </p>
-  <p>
-    <strong>Currencies:</strong>
-    {{ displayCurrencies(country.currencies) }}
-  </p>
-  <p>
-    <strong>Languages:</strong>
-    {{ displayLanguages(country.languages) }}
-  </p>
-
-  <div *ngIf="borderCountries$ | async; let borderCountries">
-    <p><strong>Border Countries:</strong></p>
-    <div *ngFor="let borderCountry of borderCountries">
-      {{ borderCountry.name }}
+  <div class="country-layout">
+    <img [src]="country.flags.svg" />
+    <div class="country-detail">
+      <h3>{{ country.name }}</h3>
+      <div class="country-info">
+        <div class="country-section">
+          <p>
+            <strong>Native Name:</strong>
+            {{ country.nativeName }}
+          </p>
+          <p>
+            <strong>Population:</strong>
+            {{ country.population | number }}
+          </p>
+          <p>
+            <strong>Region:</strong>
+            {{ country.region }}
+          </p>
+          <p>
+            <strong>Sub Region:</strong>
+            {{ country.subregion }}
+          </p>
+          <p>
+            <strong>Capital:</strong>
+            {{ country.capital }}
+          </p>
+        </div>
+        <div class="country-section">
+          <p>
+            <strong>Top Level Domain:</strong>
+            {{ country.topLevelDomain }}
+          </p>
+          <p>
+            <strong>Currencies:</strong>
+            {{ displayCurrencies(country.currencies) }}
+          </p>
+          <p>
+            <strong>Languages:</strong>
+            {{ displayLanguages(country.languages) }}
+          </p>
+        </div>
+      </div>
+      <div class="border-countries">
+        <p><strong>Border Countries:</strong></p>
+        <div
+          class="border-countries-buttons"
+          *ngIf="borderCountries$ | async; let borderCountries"
+        >
+          <div
+            class="button shadow"
+            *ngFor="let borderCountry of borderCountries"
+            [routerLink]="'/' + borderCountry.name"
+          >
+            {{ borderCountry.name }}
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

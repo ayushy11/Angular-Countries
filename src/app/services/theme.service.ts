@@ -10,7 +10,7 @@ export enum Theme {
   providedIn: 'root',
 })
 export class ThemeService {
-  private mode: BehaviorSubject<Theme> = new BehaviorSubject(Theme.light);
+  private mode: BehaviorSubject<Theme> = new BehaviorSubject(Theme.dark);
 
   constructor() {}
 
@@ -19,10 +19,10 @@ export class ThemeService {
   }
 
   toggleMode() {
-    if (this.mode.value === Theme.light) {
-      this.mode.next(Theme.dark);
-    } else {
+    if (this.mode.value === Theme.dark) {
       this.mode.next(Theme.light);
+    } else {
+      this.mode.next(Theme.dark);
     }
   }
 }
